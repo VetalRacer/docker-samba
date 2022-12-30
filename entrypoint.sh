@@ -155,8 +155,14 @@ if [[ "$(yq --output-format=json e '(.. | select(tag == "!!str")) |= envsubst' /
     if [[ "$(_jq '.validusers')" != "null" ]] && [[ -n "$(_jq '.validusers')" ]]; then
       echo "valid users = $(_jq '.validusers')" >> /etc/samba/smb.conf
     fi
+    if [[ "$(_jq '.invalidusers')" != "null" ]] && [[ -n "$(_jq '.invalidusers')" ]]; then
+      echo "invalid users = $(_jq '.invalidusers')" >> /etc/samba/smb.conf
+    fi
     if [[ "$(_jq '.adminusers')" != "null" ]] && [[ -n "$(_jq '.adminusers')" ]]; then
       echo "admin users = $(_jq '.adminusers')" >> /etc/samba/smb.conf
+    fi
+    if [[ "$(_jq '.readlist')" != "null" ]] && [[ -n "$(_jq '.readlist')" ]]; then
+      echo "read list = $(_jq '.readlist')" >> /etc/samba/smb.conf
     fi
     if [[ "$(_jq '.writelist')" != "null" ]] && [[ -n "$(_jq '.writelist')" ]]; then
       echo "write list = $(_jq '.writelist')" >> /etc/samba/smb.conf
